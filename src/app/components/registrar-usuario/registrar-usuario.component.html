@@ -1,0 +1,65 @@
+<body class="justify-content-center">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<br>
+<br>
+<div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card-group mb-0">
+          <div class="card p-4">
+            <div class="card-body">
+              <h1>CREAR NUEVO USUARIO</h1>
+              <form (ngSubmit)="registrar()" [formGroup]="registrarUsuario">
+                <p class="text-muted">Registre nuevo usuario</p>
+                <div class="input-group mb-3">
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                  <input type="email" class="form-control" formControlName="email" placeholder="Usuario">
+                </div>
+                <span *ngIf="registrarUsuario.get('email')?.hasError('required') && registrarUsuario.get('email')?.touched" class="text-danger errorLabel">
+                  El <strong>correo</strong> es requerido
+                </span>
+                <span *ngIf="registrarUsuario.get('email')?.hasError('email') && registrarUsuario.get('email')?.touched" class="text-danger errorLabel">
+                  El <strong>correo</strong> es invalido
+                </span>
+                <div class="input-group mb-4">
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                  <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                </div>
+                <span *ngIf="registrarUsuario.get('password')?.hasError('required') && registrarUsuario.get('password')?.touched" class="text-danger errorLabel">
+                  El <strong>password</strong> es requerido
+                </span>
+                <span *ngIf="registrarUsuario.get('password')?.hasError('minlength') && registrarUsuario.get('password')?.touched" class="text-danger errorLabel">
+                  El <strong>password</strong> debe tener 6 caracteres
+                </span>
+                <div class="input-group mb-4">
+                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                  <input type="password" class="form-control" formControlName="repetirPassword" placeholder="Repetir Contraseña">
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <button [disabled]="registrarUsuario.invalid" type="submit" class="btn btn-primary px-5 mt-2">CREAR</button>
+                  </div>
+                  <div class="col-6 text-right">
+                    <button type="button" class="btn btn-link px-0 mt-2" routerLink="/login">VOLVER</button>
+                  </div>
+                </div>
+              </form>
+              
+            </div>
+          </div>
+          <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+            <div *ngIf="!loading" class="card-body text-center mb-4">                
+              <div>
+                <img src="https://oauth.upeu.edu.pe/static/img/logos/logo_upeu.png" alt="logoUpeu" >
+              </div>
+            </div>
+            <app-spinner *ngIf="loading"></app-spinner>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+
